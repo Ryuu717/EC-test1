@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.card-text {
+    flex-grow: 1;
+    font-size: 0.875rem;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-body > .btn {
+    align-self: flex-start;  /* Align buttons to the start of the card body */
+}
