@@ -4,13 +4,15 @@ from models import db, Product
 import pymysql
 pymysql.install_as_MySQLdb()
 
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///products.db'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password@database-2.cf20qssae29d.ap-southeast-2.rds.amazonaws.com/test'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:Awsryuuu17@ec1.cf20qssae29d.ap-southeast-2.rds.amazonaws.com/ecdb'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = (f"mysql://{os.getenv('RDS_USERNAME')}:{os.getenv('RDS_PASSWORD')}"f"@{os.getenv('RDS_ENDPOINT')}/{os.getenv('RDS_DB_NAME')}")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
